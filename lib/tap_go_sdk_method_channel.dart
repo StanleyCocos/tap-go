@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'tap_go_sdk_platform_interface.dart';
@@ -51,7 +50,6 @@ class MethodChannelTapGoSdk extends TapGoSdkPlatform {
       },
     );
   }
-
 
   @override
   Future<void> recurrentPay({

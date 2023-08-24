@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
                   totalPrice: "0.01",
                   remark: "本次交易未测试1",
                   onSuccess: (result) {
-                    // print("成功支付了:: success: $result");
+                    print("成功支付了:: success: $result");
                   },
                   onFail: (result) {
                     print("支付失败：：fail: $result");

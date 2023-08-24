@@ -65,14 +65,11 @@ abstract class TapGoSdkPlatform extends PlatformInterface {
         'singleAndRecurrentPayment() has not been implemented.');
   }
 
-
-  Future<String> getSdkVersion(){
-    throw UnimplementedError(
-        'getSdkVersion() has not been implemented.');
+  Future<String> getSdkVersion() {
+    throw UnimplementedError('getSdkVersion() has not been implemented.');
   }
 
-
-  Future<void> setSandBoxModeEnable(bool enable){
+  Future<void> setSandBoxModeEnable(bool enable) {
     throw UnimplementedError(
         'setSandBoxModeEnable() has not been implemented.');
   }

@@ -1,7 +1,6 @@
 import 'tap_go_sdk_platform_interface.dart';
 
 class TapGoSdk {
-
   static Future<void> init({
     required String appId,
     required String apiKey,
@@ -19,7 +18,6 @@ class TapGoSdk {
   static Future<String> getSdkVersion() async {
     return await TapGoSdkPlatform.instance.getSdkVersion();
   }
-
 
   static Future<void> setSandBoxModeEnable(bool enable) async {
     return await TapGoSdkPlatform.instance.setSandBoxModeEnable(enable);
@@ -55,7 +53,7 @@ class TapGoSdk {
     );
   }
 
- static Future<void> singleAndRecurrentPay({
+  static Future<void> singleAndRecurrentPay({
     String merTradeNo = "",
     String totalPrice = "",
     String remark = "",

@@ -9,6 +9,10 @@ import com.hktpayment.tapngosdk.exception.DoPaymentException
 import com.hktpayment.tapngosdk.listener.IPaymentAuthFailListener
 import com.hktpayment.tapngosdk.utils.Logger
 import io.flutter.plugin.common.MethodChannel
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
 object TapGoManager {
@@ -111,21 +115,27 @@ object TapGoManager {
         TapNGoSdkSettings.setSandboxMode(enable)
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun onPaymentSuccess(result: TapNGoPayResult) {
-        channel.invokeMethod("paymentSuccessWithPayResult", HashMap<String, Any>().apply {
-            put("code", result.resultCode)
-            put("tradeState", result.tradeStatus?.name ?: "")
-        })
+        GlobalScope.launch(Dispatchers.Main) {
+            channel.invokeMethod("paymentSuccessWithPayResult", HashMap<String, Any>().apply {
+                put("code", result.resultCode)
+                put("tradeState", result.tradeStatus?.name ?: "")
+            })
+        }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun onPaymentFail(result: TapNGoPayResult) {
-        channel.invokeMethod("paymentFailWithPayResult", HashMap<String, Any>().apply {
-            put("code", result.resultCode)
-            put("merTradeNo", result.merTradeNo)
-            put("token", result.recurrentToken)
-            put("message", result.message)
-            put("tradeNo", result.tradeNo)
-            put("tradeState", result.tradeStatus?.name ?: "")
-        })
+        GlobalScope.launch(Dispatchers.Main) {
+            channel.invokeMethod("paymentFailWithPayResult", HashMap<String, Any>().apply {
+                put("code", result.resultCode)
+                put("merTradeNo", result.merTradeNo)
+                put("token", result.recurrentToken)
+                put("message", result.message)
+                put("tradeNo", result.tradeNo)
+                put("tradeState", result.tradeStatus?.name ?: "")
+            })
+        }
     }
 }

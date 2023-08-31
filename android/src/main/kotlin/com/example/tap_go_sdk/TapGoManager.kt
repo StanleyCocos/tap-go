@@ -114,7 +114,7 @@ object TapGoManager {
     fun onPaymentSuccess(result: TapNGoPayResult) {
         channel.invokeMethod("paymentSuccessWithPayResult", HashMap<String, Any>().apply {
             put("code", result.resultCode)
-            put("tradeState", result.tradeStatus.name)
+            put("tradeState", result.tradeStatus?.name ?: "")
         })
     }
 
@@ -125,7 +125,7 @@ object TapGoManager {
             put("token", result.recurrentToken)
             put("message", result.message)
             put("tradeNo", result.tradeNo)
-            put("tradeState", result.tradeStatus.name)
+            put("tradeState", result.tradeStatus?.name ?: "")
         })
     }
 }

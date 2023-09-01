@@ -119,8 +119,12 @@ object TapGoManager {
     fun onPaymentSuccess(result: TapNGoPayResult) {
         GlobalScope.launch(Dispatchers.Main) {
             channel.invokeMethod("paymentSuccessWithPayResult", HashMap<String, Any>().apply {
-                put("code", result.resultCode)
-                put("tradeState", result.tradeStatus?.name ?: "")
+                put("resultCode", result.resultCode)
+                put("merTradeNo", result.merTradeNo)
+                put("recurrentToken", result.recurrentToken)
+                put("message", result.message)
+                put("tradeNo", result.tradeNo)
+                put("tradeStatus", result.tradeStatus?.name ?: "")
             })
         }
     }
@@ -129,12 +133,12 @@ object TapGoManager {
     fun onPaymentFail(result: TapNGoPayResult) {
         GlobalScope.launch(Dispatchers.Main) {
             channel.invokeMethod("paymentFailWithPayResult", HashMap<String, Any>().apply {
-                put("code", result.resultCode)
+                put("resultCode", result.resultCode)
                 put("merTradeNo", result.merTradeNo)
-                put("token", result.recurrentToken)
+                put("recurrentToken", result.recurrentToken)
                 put("message", result.message)
                 put("tradeNo", result.tradeNo)
-                put("tradeState", result.tradeStatus?.name ?: "")
+                put("tradeStatus", result.tradeStatus?.name ?: "")
             })
         }
     }
